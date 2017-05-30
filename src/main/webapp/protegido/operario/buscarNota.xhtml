@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition template="/WEB-INF/templates/plantilla.xhtml">
+        <ui:define name="content">
+            <h3>Buscar Nota</h3>
+            <h:form>
+                <h:panelGrid id="pgbuscar" columns="5">
+                    <p:outputLabel for="fecha" value="Fecha"/>
+                    <p:calendar id="fecha" locale="es" value="#{notacontroller.nota.fecha}" pattern="dd/MM/yyyy"/>
+                    <p:outputLabel value="Categoria" for="categoria"/>
+                    <p:selectOneMenu id="categoria" value="#{notacontroller.nota.categoria.codigo}">
+                        <f:selectItem itemLabel="--Seleccione--" itemValue=""/>
+                        <f:selectItems value="#{notacontroller.lsCategorias()}" var="categoria" itemLabel="#{categoria.nombre}" itemValue="#{categoria.codigo}"/>
+                    </p:selectOneMenu>
+                    <p:commandButton ajax="false" value="Buscar" actionListener="#{notacontroller.buscar}"/>
+                </h:panelGrid>
+            </h:form>    
+
+            <!--resultados encontrados-->
+            <h:form>
+                <p:dataTable id="databusq" value="#{notacontroller.notasBusq}" var="nota" paginator="true" rows="10">
+                    <p:column headerText="Fecha">
+                        <h:outputText value="#{nota.fecha}">
+                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                        </h:outputText>
+                    </p:column>
+                    <p:column headerText="Categoria">
+                        <h:outputText value="#{nota.categoria.nombre}"/>
+                    </p:column>
+                    <p:column headerText="Titulo">
+                        <h:outputText value="#{nota.encabezado}"/>
+                    </p:column>
+                    <p:column headerText="Contenido">     
+                        <h:outputText value="#{nota.cuerpo}"/>
+                    </p:column>
+                    <p:column headerText="Valorizacion">
+                        <p:rating value="#{nota.valorizacion}" readonly="true"/>
+                    </p:column>
+                    <p:column>
+                        <p:commandLink value="Editar"/>
+                    </p:column>
+                    <p:column>
+                        <p:commandLink value="Eliminar"/>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+
+        </ui:define>
+    </ui:composition>
+</html>
+

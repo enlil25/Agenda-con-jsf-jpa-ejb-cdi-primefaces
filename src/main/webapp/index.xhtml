@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+        <h:outputStylesheet library="css" name="index.css"/>
+    </h:head>
+    <h:body id="principal">
+        <div id="cuadro">
+            <h:form>
+                <p:messages globalOnly="true" showDetail="true" autoUpdate="true"/>
+                <h:panelGrid columns="3">
+                    <p:outputLabel value="Usuario" for="usuario"/>
+                    <p:inputText id="usuario" value="#{indexcontroller.usuario.usuario}" required="true" requiredMessage="usuario es requerido"/>
+                    <p:message for="usuario" />
+                    <p:outputLabel value="Password" for="pwd"/>
+                    <p:password id="pwd" value="#{indexcontroller.usuario.clave}" required="true" requiredMessage="Password es requerido" />
+                    <p:message for="pwd" />
+                    <h:column/>
+                    <p:commandButton icon="ui-icon-key" action="#{indexcontroller.iniciarSesion}" value="Ingresar" ajax="false"/>
+                </h:panelGrid>
+            </h:form>  
+            <p:separator/>
+            <p:link outcome="usuario.xhtml" value="Crear cuenta"/>
+        </div>
+
+    </h:body>
+</html>
+

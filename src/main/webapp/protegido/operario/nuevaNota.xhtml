@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition template="./../../WEB-INF/templates/plantilla.xhtml">
+        <ui:define name="content">
+            <h2>Nueva Nota</h2>
+           
+
+            <h:form>
+                <p:messages id="mensajes" globalOnly="true" autoUpdate="false"/>
+                <h:panelGrid id="pgnota" columns="3">
+                    <p:outputLabel value="Titulo" for="titulo"/>
+                    <p:inputText value="#{notacontroller.nota.encabezado}" id="titulo" required="true" requiredMessage="Titulo es requerido"/>
+                    <p:message for="titulo"/>
+                    <p:outputLabel value="Contenido" for="contenido"/>
+                    <p:inputTextarea rows="10" cols="50" value="#{notacontroller.nota.cuerpo}" id="contenido" />
+                    <p:message for="contenido"/>
+                    <p:outputLabel value="Categoria" for="categoria"/>
+                    
+                    <p:selectOneMenu value="#{notacontroller.categoria.codigo}" id="categoria" required="true" requiredMessage="Categoria es obligatorio">
+                        <f:selectItem itemLabel="--Seleccione--" itemValue=""/>
+                        <f:selectItems value="#{notacontroller.lsCategorias()}" var="categoria" itemLabel="#{categoria.nombre}" itemValue="#{categoria.codigo}"/>
+                    </p:selectOneMenu>
+                    <p:message for="categoria"/>
+                    <h:column/>
+                    <p:commandButton update="pgnota,mensajes" actionListener="#{notacontroller.registrarNota}" icon="ui-icon-new" value="Registrar nota"/>
+
+                </h:panelGrid>
+
+            </h:form>
+
+        </ui:define>
+
+    </ui:composition>
+</html>
+
+

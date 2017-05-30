@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <h:outputStylesheet library="css" name="default.css"/>
+        <h:outputStylesheet library="css" name="cssLayout.css"/>
+        <title>Facelets Template</title>
+
+        <f:event type="preRenderView" listener="#{plantillacontroller.verificarSesion}"/>
+
+    </h:head>
+
+    <h:body>
+
+        <div id="top">
+            <ui:insert name="top">
+                <!--menubar -->
+                <h:form>
+                    <p:menubar model="#{menucontroller.menuModel}">
+                        <f:facet name="options">
+                            <p:commandButton title="Cerrar Sesion" icon="ui-icon-power" action="/index.xhtml?faces-redirect=true" actionListener="#{logincontroller.cerrarSesion}"/>
+                        </f:facet>
+                    </p:menubar>
+
+                </h:form>
+
+            </ui:insert>
+        </div>
+
+        <div id="content" class="center_content">
+            <ui:insert name="content">Content</ui:insert>
+        </div>
+
+        <div id="bottom" style="text-align: center;">
+            <ui:insert name="bottom">
+                <p>Ejemplo de primefaces avanzado</p>  
+            </ui:insert>
+        </div>
+
+    </h:body>
+
+</html>
