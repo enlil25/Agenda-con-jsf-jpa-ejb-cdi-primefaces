@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition template="/WEB-INF/templates/plantilla.xhtml">
+        <ui:define name="content">
+            <h3>Consultar Telefonos</h3>
+            <h:form>
+                <h:panelGrid columns="3">
+                    <p:outputLabel value="Persona" for="persona"/>
+                    <p:selectOneMenu id="persona" filter="true" filterMatchMode="contains" value="#{consultarcontroller.persona.codigo}">
+                        <f:selectItem itemLabel="--Seleccione--" itemValue=""/>
+                        <f:selectItems value="#{consultarcontroller.lstPersonas()}" var="persona" itemLabel="#{persona.apellidos},#{persona.nombre}" itemValue="#{persona.codigo}"/>
+                    </p:selectOneMenu>
+                    <p:commandButton value="Buscar" update="listabusq" actionListener="#{consultarcontroller.buscar}" icon="ui-icon-search"/>
+                </h:panelGrid>
+
+                <p:dataList value="#{consultarcontroller.listadoTelefonos}" var="telefono" type="ordered" id="listabusq" emptyMessage="No hay resultados a mostrar">
+                    <f:facet name="header">
+                        Telefonos
+                    </f:facet>
+                    #{telefono.numero}
+                </p:dataList>
+
+            </h:form>
+        </ui:define>
+
+    </ui:composition>
+</html>
+

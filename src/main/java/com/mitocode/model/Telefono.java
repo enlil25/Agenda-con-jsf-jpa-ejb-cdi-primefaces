@@ -86,6 +86,11 @@ public class Telefono implements Serializable{
         final Telefono other = (Telefono) obj;
         return Objects.equals(this.codigo, other.codigo);
     }
+
+    @Override
+    public String toString() {
+        return "Telefono{" + "codigo=" + codigo + ", numero=" + numero + ", persona=" + persona + '}';
+    }
     
     
     

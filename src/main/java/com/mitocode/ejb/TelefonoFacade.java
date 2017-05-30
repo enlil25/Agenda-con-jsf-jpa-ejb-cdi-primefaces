@@ -31,6 +31,7 @@ public class TelefonoFacade extends AbstractFacade<Telefono> implements Telefono
         super(Telefono.class);
     }
 
+    @Override
     public List<Telefono> listarPorPersona(Persona persona) {
         
         return em.createQuery("select p from Telefono p where p.persona.codigo=:codigo", Telefono.class).setParameter("codigo", persona.getCodigo()).getResultList();
